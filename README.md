@@ -1,4 +1,15 @@
+<div class="filament-hidden">
+
+![Obsidian Notes](https://raw.githubusercontent.com/jeffersongoncalves/claude-code-obsidian-notes/main/art/jeffersongoncalves-claude-code-obsidian-notes.png)
+
+</div>
+
 # Obsidian Notes (Claude Code plugin)
+
+<p align="center">
+  <a href="https://github.com/jeffersongoncalves/claude-code-obsidian-notes/releases/latest"><img src="https://img.shields.io/github/v/release/jeffersongoncalves/claude-code-obsidian-notes" alt="Latest Release" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/jeffersongoncalves/claude-code-obsidian-notes" alt="License" /></a>
+</p>
 
 Claude Code plugin: a skill and a `/obsidian-note` command that persist documentation, decisions, and summaries as Markdown notes in the user's Obsidian vault, by shelling out to the [`obsidian-notes-cli`](https://github.com/jeffersongoncalves/obsidian-notes-cli).
 
