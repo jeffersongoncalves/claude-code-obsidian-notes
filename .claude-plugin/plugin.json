@@ -1,0 +1,9 @@
+{
+  "name": "obsidian-notes",
+  "version": "1.0.0",
+  "description": "Persist Claude Code documentation and decisions as Markdown notes in an Obsidian vault via the obsidian-notes-cli.",
+  "author": {
+    "name": "Jefferson Goncalves",
+    "url": "https://github.com/jeffersongoncalves"
+  }
+}

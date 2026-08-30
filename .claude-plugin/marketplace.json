@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "obsidian-notes",
+  "description": "Persist Claude Code notes into an Obsidian vault via the obsidian-notes-cli.",
+  "owner": {
+    "name": "Jefferson Goncalves",
+    "url": "https://github.com/jeffersongoncalves"
+  },
+  "plugins": [
+    {
+      "name": "obsidian-notes",
+      "description": "Skill + /obsidian-note command that shells out to the obsidian-notes-cli to persist notes into an Obsidian vault.",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
