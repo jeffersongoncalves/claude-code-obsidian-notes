@@ -22,7 +22,7 @@ Part of a 3-repo integration:
 ## Requirements
 
 - `obsidian-notes-cli` on `PATH` (or resolvable another way — see Install)
-- A vault path the CLI can resolve: `OBSIDIAN_VAULT` env var, or a `.claude-notes.json` findable by walking up from your project directory
+- A vault path the CLI can resolve: `--vault` flag, `OBSIDIAN_VAULT` env var, or a persisted default from `vault:config`
 
 ## What's in this repo
 
@@ -45,12 +45,14 @@ Then in Claude Code:
 /plugin install obsidian-notes
 ```
 
-Set `OBSIDIAN_VAULT` to your vault's path, or run `obsidian-notes vault:init <path>` once so `.claude-notes.json` is discoverable from your project directories:
+Set `OBSIDIAN_VAULT` to your vault's path, or persist a default the CLI will fall back to automatically:
 
 ```bash
 export OBSIDIAN_VAULT=/path/to/vault
-# or, per-vault:
+# or, to persist a default (new vault — scaffolds .claude-notes.json too):
 obsidian-notes vault:init /path/to/vault
+# or, to point the default at an existing vault:
+obsidian-notes vault:config /path/to/vault
 ```
 
 ## Usage
@@ -71,11 +73,11 @@ Nothing is written automatically at the end of a session, and there's no hook wi
 
 ## How it resolves things
 
-- **Vault**: `OBSIDIAN_VAULT` env var first; otherwise the nearest ancestor `.claude-notes.json`, found by walking up from the current working directory.
+- **Vault**: the CLI's own precedence — `--vault` flag, then `OBSIDIAN_VAULT` env var, then the persisted default from `vault:config`. The skill only passes `--vault` when the user gave an explicit path; otherwise it lets the CLI resolve it. (`.claude-notes.json` lives in the vault root and holds `folderPattern`/`frontmatterDefaults` — it's not part of vault-path resolution.)
 - **Project**: the current repo's folder name, or its `git remote get-url origin` basename when available — this is what groups notes both in the vault's folder structure and in the Obsidian plugin's sidebar.
 - **Body**: written as clean Markdown and piped to the CLI over stdin — no frontmatter added here, the CLI handles `source`/`project`/`title`/`tags`/`created`/`updated` itself.
 
-If neither `OBSIDIAN_VAULT` nor a `.claude-notes.json` resolves, the skill asks for a vault path rather than guessing one.
+If none of `--vault`, `OBSIDIAN_VAULT`, or a persisted `vault:config` default resolves, the skill asks for a vault path rather than guessing one.
 
 See `skills/obsidian-notes/SKILL.md` for the exact logic Claude Code follows.
 

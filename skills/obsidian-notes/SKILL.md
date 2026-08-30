@@ -10,12 +10,15 @@ Persists a piece of documentation, a decision, or a summary as a Markdown note i
 
 ## Resolving the vault
 
-In this order:
+The CLI resolves the vault itself, in this order:
 
-1. `OBSIDIAN_VAULT` environment variable, if set.
-2. Walk up from the current working directory looking for a `.claude-notes.json` — its containing directory is the vault root.
+1. `--vault` flag, if passed explicitly.
+2. `OBSIDIAN_VAULT` environment variable.
+3. The persisted default from `vault:config` (stored in `~/.obsidian-notes-cli/config.json`, set by `vault:init` or `vault:config <path>`).
 
-If neither resolves, ask the user for the vault path (or offer to run `obsidian-notes vault:init <path>` first) rather than guessing one.
+Don't pass `--vault` unless the user gave an explicit path — let the CLI fall back to `OBSIDIAN_VAULT` or its persisted default. If none of those resolve (the CLI errors that no vault is configured), ask the user for a vault path — or offer to run `obsidian-notes vault:init <path>` for a new vault, or `obsidian-notes vault:config <path>` to set an existing one as default — rather than guessing.
+
+`.claude-notes.json` lives in the vault root (scaffolded by `vault:init`) and holds `folderPattern`/`frontmatterDefaults` for how notes get organized in the vault — it's not part of vault-path resolution and isn't found by walking up from the cwd.
 
 ## Resolving the project name
 
@@ -27,10 +30,10 @@ Use the current repo's folder name (or `git remote get-url origin` basename if a
 2. Run:
 
    ```bash
-   echo "<body>" | obsidian-notes note:create --project=<project> --title="<title>" --tags=<tag1> --tags=<tag2> --vault="<vault path>"
+   echo "<body>" | obsidian-notes note:create --project=<project> --title="<title>" --tags=<tag1> --tags=<tag2>
    ```
 
-   Prefer piping a real multi-line body (a heredoc or a temp file) over `echo` for anything longer than one line.
+   Only add `--vault="<vault path>"` if the user gave an explicit path this run — otherwise let the CLI resolve it (env var / persisted default) as described above. Prefer piping a real multi-line body (a heredoc or a temp file) over `echo` for anything longer than one line.
 3. Report back the path the CLI printed (`Note written to ...`) — don't just say "done".
 
 ## If the CLI isn't installed
