@@ -1,7 +1,7 @@
 ---
 name: obsidian-notes
 description: This skill should be used when the user asks to "salva isso no obsidian", "documenta essa decisão no obsidian", "anota isso no obsidian", "persist this as an Obsidian note", "write this decision to Obsidian", "save this to my notes", or invokes /obsidian-note. Writes a Markdown note (with proper frontmatter) into the user's Obsidian vault via the obsidian-notes-cli, so it shows up organized and searchable in Obsidian.
-version: 1.0.0
+version: 1.0.1
 ---
 
 # Obsidian Notes
