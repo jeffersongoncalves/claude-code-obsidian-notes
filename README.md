@@ -6,6 +6,8 @@
 
 # Obsidian Notes (Claude Code plugin)
 
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-FFDD00?style=flat-square&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/jeffersongoncalves)
+
 <p align="center">
   <a href="https://github.com/jeffersongoncalves/claude-code-obsidian-notes/releases/latest"><img src="https://img.shields.io/github/v/release/jeffersongoncalves/claude-code-obsidian-notes" alt="Latest Release" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/github/license/jeffersongoncalves/claude-code-obsidian-notes" alt="License" /></a>
