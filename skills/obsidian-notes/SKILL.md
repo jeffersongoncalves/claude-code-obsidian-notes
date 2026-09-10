@@ -1,7 +1,7 @@
 ---
 name: obsidian-notes
 description: This skill should be used when the user asks to "salva isso no obsidian", "documenta essa decisão no obsidian", "anota isso no obsidian", "persist this as an Obsidian note", "write this decision to Obsidian", "save this to my notes", or invokes /obsidian-note. Writes a Markdown note (with proper frontmatter) into the user's Obsidian vault via the obsidian-notes-cli, so it shows up organized and searchable in Obsidian.
-version: 1.0.1
+version: 1.0.2
 ---
 
 # Obsidian Notes
@@ -35,6 +35,16 @@ Use the current repo's folder name (or `git remote get-url origin` basename if a
 
    Only add `--vault="<vault path>"` if the user gave an explicit path this run — otherwise let the CLI resolve it (env var / persisted default) as described above. Prefer piping a real multi-line body (a heredoc or a temp file) over `echo` for anything longer than one line.
 3. Report back the path the CLI printed (`Note written to ...`) — don't just say "done".
+
+## Reading a note back
+
+When something downstream needs the note's raw body again (e.g. a `PreToolUse:Write` hook redirected a scratch write into a note, and the agent now needs that content as input to another tool), don't fall back to a plain file read — it pulls in the `source`/`project`/`title`/`tags`/`created`/`updated` frontmatter block along with the body. Instead:
+
+```bash
+obsidian-notes note:read "<path>"
+```
+
+This prints the note's content with frontmatter stripped, giving back just the body that was written.
 
 ## If the CLI isn't installed
 
